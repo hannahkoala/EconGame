@@ -6,11 +6,9 @@ public class CameraController : MonoBehaviour {
 	public GameObject cameraPoint;
 	public GameObject cameraPivot;
 	float vertRotation = 0;
-	Quaternion pivotRotation;
 
 	// Use this for initialization
 	void Start () {
-		pivotRotation = cameraPivot.transform.rotation;
 	}
 	
 	// Update is called once per frame
@@ -35,7 +33,6 @@ public class CameraController : MonoBehaviour {
 				vertRotation = -35;
 			}
 			cameraPivot.transform.localRotation = Quaternion.Euler(new Vector3(vertRotation, 0, 0));
-			Debug.Log(vertRotation);
 		}
 
 		camera.orthographicSize -= Input.GetAxis ("Mouse ScrollWheel") * 10;
