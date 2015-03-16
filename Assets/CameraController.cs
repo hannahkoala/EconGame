@@ -53,5 +53,6 @@ public class CameraController : MonoBehaviour {
 		if (camera.orthographicSize > 20) {
 			camera.orthographicSize = 20;
 		}
+		camera.fieldOfView = camera.orthographicSize;
 	}
 }
