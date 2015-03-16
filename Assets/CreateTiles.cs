@@ -49,12 +49,12 @@ public class CreateTiles : MonoBehaviour {
 		
 		uv = new Vector2[]
 		{
-			new Vector2(0,0.25f),
-			new Vector2(0,0.75f),
-			new Vector2(0.5f,1),
-			new Vector2(1,0.75f),
-			new Vector2(1,0.25f),
-			new Vector2(0.5f,0),
+			new Vector2(0.25f,    0),
+			new Vector2(0.75f,    0),
+			new Vector2(    1, 0.5f),
+			new Vector2(0.75f,    1),
+			new Vector2(0.25f,    1),
+			new Vector2(    0, 0.5f),
 		};
 		
 		//add a mesh filter to the GO the script is attached to; cache it for later
@@ -80,11 +80,18 @@ public class CreateTiles : MonoBehaviour {
 		
 		//UV TESTING
 		renderer.material = material;
+
+		if (Random.value < 0.5) {
+			gameObject.transform.localScale = new Vector3(1, 1, -1);
+		}
+		float rotation = (int)(Random.value * 6) * 60;
+		Debug.Log (rotation);
+		gameObject.transform.Rotate (new Vector3 (0, rotation, 0));
 		
 	}
 
 	Vector3 HexCorner(int i) {
-		float size = 0.95f;
+		float size = 1.01f;
 		float angle_deg = 60 * i;
 		float angle_rad = angle_deg * Mathf.Deg2Rad;
 		return new Vector3 (size * Mathf.Cos (angle_rad), 0, size * Mathf.Sin (angle_rad));
