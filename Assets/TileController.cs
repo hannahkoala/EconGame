@@ -72,6 +72,9 @@ public class TileController : MonoBehaviour {
 		float rotation = (int)(Random.value * 6) * 60;
 		Debug.Log (rotation);
 		gameObject.transform.Rotate (new Vector3 (0, rotation, 0));
+
+		MeshCollider collider = gameObject.AddComponent<MeshCollider> ();
+		collider.sharedMesh = mesh;
 	}
 	
 	Vector3 HexCorner(int i) {
@@ -79,5 +82,8 @@ public class TileController : MonoBehaviour {
 		float angle_deg = 60 * i;
 		float angle_rad = angle_deg * Mathf.Deg2Rad;
 		return new Vector3 (size * Mathf.Cos (angle_rad), 0, size * Mathf.Sin (angle_rad));
+	}
+	void OnMouseDown() {
+		Destroy(gameObject);
 	}
 }
