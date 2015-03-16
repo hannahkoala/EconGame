@@ -2,28 +2,27 @@
 using System.Collections;
 
 public class CreateTiles : MonoBehaviour {
-	float sin30 = Mathf.Sin(30 * Mathf.Deg2Rad);
-	float cos30 = Mathf.Cos(30 * Mathf.Deg2Rad);
 
 	//basic hexagon mesh making
 	public Vector3[] vertices;	
 	public Vector2[] uv;
 	public int[] triangles;
 
-	// Use this for initialization
-	void Start () {	
-		for (int x = 0; x < 50; x ++) {
-			for (int  y= 0; y < 50; y ++) {
-				if(x + y > 75 || x + y < 25) {
+	public Material material;
+
+	// Use this for initializationMaterial mat;
+	void Start()
+	{
+		for (int q = 0; q < 50; q ++) {
+			for (int  r= 0; r < 50; r ++) {
+				if(q + r >= 75 || q + r < 25) {
 					continue;
 				}
-				float size = 1.75f;
-				GameObject tile = (GameObject) Instantiate (new GameObject(), new Vector3(y * cos30 * size, 0f, x * size + y * sin30 * size), Quaternion.identity);
+				float size = 1f;
+				float x = size * 3f/2 * q;
+				float y = size * Mathf.Sqrt(3) * (r + q/2f);
+				GameObject tile = (GameObject) Instantiate (new GameObject(), new Vector3(x, 0f, y), Quaternion.identity);
 				MeshSetup(tile);
-				if(x == 25 && y == 25) {
-					Debug.Log(new Vector3(y * cos30 * size, 0f, x * size + y * sin30 * size));
-				}
-				//Instantiate (tile, new Vector3(x * 2, 0f, x * 2 * sin30 + y * 2 * cos30), Quaternion.identity);
 			}
 		}
 	}
@@ -61,7 +60,7 @@ public class CreateTiles : MonoBehaviour {
 		//add a mesh filter to the GO the script is attached to; cache it for later
 		MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>();
 		//add a mesh renderer to the GO the script is attached to
-		gameObject.AddComponent<MeshRenderer>();
+		Renderer renderer = gameObject.AddComponent<MeshRenderer>();
 		
 		//create a mesh object to pass our data into
 		Mesh mesh = new Mesh();
@@ -80,13 +79,12 @@ public class CreateTiles : MonoBehaviour {
 		meshFilter.mesh = mesh;
 		
 		//UV TESTING
-		//renderer.material.mainTexture = texture;
-
+		renderer.material = material;
 		
 	}
 
 	Vector3 HexCorner(int i) {
-		float size = 1;
+		float size = 0.95f;
 		float angle_deg = 60 * i;
 		float angle_rad = angle_deg * Mathf.Deg2Rad;
 		return new Vector3 (size * Mathf.Cos (angle_rad), 0, size * Mathf.Sin (angle_rad));
