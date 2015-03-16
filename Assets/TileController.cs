@@ -75,7 +75,7 @@ public class TileController : MonoBehaviour {
 	}
 	
 	Vector3 HexCorner(int i) {
-		float size = 1.01f;
+		float size = 1.0f;
 		float angle_deg = 60 * i;
 		float angle_rad = angle_deg * Mathf.Deg2Rad;
 		return new Vector3 (size * Mathf.Cos (angle_rad), 0, size * Mathf.Sin (angle_rad));
