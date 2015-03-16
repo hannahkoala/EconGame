@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class TileController : MonoBehaviour {
-	public GameObject gameObject;
+	public GameObject tileProto;
+	GameObject attachedObject;
 	Vector3[] vertices;	
 	Vector2[] uv;
 	int[] triangles;
@@ -67,10 +68,9 @@ public class TileController : MonoBehaviour {
 		renderer.material = material;
 		
 		if (Random.value < 0.5) {
-			gameObject.transform.localScale = new Vector3(1, 1, -1);
+			//gameObject.transform.localScale = new Vector3(1, 1, -1);
 		}
 		float rotation = (int)(Random.value * 6) * 60;
-		Debug.Log (rotation);
 		gameObject.transform.Rotate (new Vector3 (0, rotation, 0));
 
 		MeshCollider collider = gameObject.AddComponent<MeshCollider> ();
@@ -84,6 +84,8 @@ public class TileController : MonoBehaviour {
 		return new Vector3 (size * Mathf.Cos (angle_rad), 0, size * Mathf.Sin (angle_rad));
 	}
 	void OnMouseDown() {
-		Destroy(gameObject);
+		attachedObject = (GameObject) Instantiate (Resources.Load("Factory"));
+		attachedObject.transform.parent = gameObject.transform;
+		attachedObject.transform.localPosition = Vector3.zero;
 	}
 }
