@@ -14,9 +14,15 @@ public class CreateTiles : MonoBehaviour {
 	void Start () {	
 		for (int x = 0; x < 50; x ++) {
 			for (int  y= 0; y < 50; y ++) {
+				if(x + y > 75 || x + y < 25) {
+					continue;
+				}
 				float size = 1.75f;
 				GameObject tile = (GameObject) Instantiate (new GameObject(), new Vector3(y * cos30 * size, 0f, x * size + y * sin30 * size), Quaternion.identity);
 				MeshSetup(tile);
+				if(x == 25 && y == 25) {
+					Debug.Log(new Vector3(y * cos30 * size, 0f, x * size + y * sin30 * size));
+				}
 				//Instantiate (tile, new Vector3(x * 2, 0f, x * 2 * sin30 + y * 2 * cos30), Quaternion.identity);
 			}
 		}
