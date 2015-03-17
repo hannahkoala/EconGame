@@ -15,9 +15,7 @@ public class TileController : MonoBehaviour {
 	}
 
 	void MeshSetup () {
-		float floorLevel = 0;
-		
-		
+	
 		vertices = new Vector3[6];
 		for(int i = 0; i < 6; i++)
 		{
